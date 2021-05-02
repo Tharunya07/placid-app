@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title> Placid | Sessions </title>
+        <style>
+            body {
+	            font-family: 'Roboto', sans-serif;
+	            font-size: 16px;
+	            background-size: cover;
+	            margin: 20px;
+            }
+        </style>
+    </head>
+    <body background="{{url_for('static', filename='images/bg.png')}}">
+        <div class="container" style="display: block; margin-top: 25vh; margin-bottom: 15vh;">
+            <div class="subcontainer" style="float: center; margin-left: 40vh; margin-right: 40vh; margin-top: 10vh; display: block;">
+                <center>
+                <h2>Open Sessions</h2>
+                {% if opensessions==[] %}
+                    <h3>Aww. There are no open sessions...</h3>
+                {% else %}
+                    {% for sessionid in opensessions %}
+                        <h3> <a href="/join{{sessionid}}"> Open Session </a> </h3> <br>
+                    {% endfor %}
+                {% endif %}
+                <br><hr><br>
+                <h2>Your previous sessions</h2>
+                {% if prevsessions == None %}
+                    <h3> Oops. You dont have any previous sessions </h3>
+                {% else %}
+                    {% for sessionid in prevsessions %}
+                        <h3> <a href="/join{{sessionid}}"> Open Session </a></h3>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+                </center>
+            </div>
+        </div>
+    </body>
+</html>

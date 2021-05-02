@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title> Place | User Profile </title>
+        <style>
+            body {
+	            font-family: 'Roboto', sans-serif;
+	            font-size: 16px;
+	            background-size: cover;
+	            margin: 20px;
+            }
+        </style>
+    </head>
+    <body background="{{url_for('static', filename='images/bg.png')}}">
+        <div class="container" style="display: block;">
+            <div class="subcontainer" style="float: center; margin-left: 5vh; margin-top: 5vh; display: block;">
+                <center>
+                    <br<br><br>
+                    <div class="headtext" style="font-size: 40;"><b>{{name}}</b></div>
+                    <br>
+                    <br>
+                    <div class="subhead" style="font-size: 24;">Joined On<br>{{joinedon}}</div>
+                </center>
+            </div>
+            <center>
+                <div class="subcontainer" style="float: left; margin-left: 5vh; margin-top: 5vh;">
+                    <h2>Speaker Sessions</h2>
+                    <hr>
+                    {% if speakersessions==[] %}
+                        <h3><font color="red">No speaker sessions yet! <a href="/chat">Click here to start one!</a></font></h3>
+                    {% else %}
+                        <div class="content" style="margin-left: 2vh;">
+                            {% for i in speakersessions %}
+                                <h3>
+                                    Session : 
+                                    Message Count: {{i[0]}} Started On: {{i[1]}}
+                                </h3>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <br>
+                    <br>
+                </div>
+                <div class="subcontainer" style="float: left; margin-left: 20vh; margin-top: 5vh;">
+                    <h2>Listener Sessions</h2>
+                    {% if listenersessions==[] %}
+                        <h3><font color="red">No listener sessions yet! <a href="/choice">Click here to start one!</a></font></h3>
+                    {% else %}
+                    <div class="content" style="margin-left: 2vh;">
+                        {% for i in listenersessions %}
+                            <h3>
+                                Session : 
+                                Message Count: {{i[0]}} Started On: {{i[1]}} <a href="{{i[2]}}"> View Session </a>
+                            </h3>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </center>
+        </div>
+    </body>
+</html>

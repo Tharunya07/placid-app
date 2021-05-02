@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title> Placid | Choice Window </title>
+        <style>
+            body {
+	            font-family: 'Roboto', sans-serif;
+	            font-size: 16px;
+	            background-size: cover;
+	            margin: 20px;
+            }
+        </style>
+    </head>
+	<div class="header" style="margin-left: 4vh;">
+        <font color="#FF007F" style="display: inline-block;"><h1>Placid</h1></font>
+        <a href="/userprofile" style="color: #000000;"><h2 style="background: #0d3263; color: white; margin-bottom: 5vh; padding: 6px 20px; border-radius: 12px; margin-left: 150vh; display: inline-block;">My Profile</h2></a>
+    </div>
+    <body background="{{url_for('static', filename='images/bg.png')}}">
+        <div class="container" style="display: block; margin-top: 30vh;">
+            <div class="subcontainer" style="float: center; margin-left: 40vh; margin-right: 40vh; margin-top: 10vh; display: block;">
+                <center>
+                    <a href="{{chaturl}}" style="text-decoration: none;"><div class="button" style="background: pink; font-size: 24px; padding: 14px 40px; border-radius: 12px; margin-top: 1vh; margin-bottom: 1vh; float: left;">Create new session!</div></a>
+                    <a href="{{joinurl}}" style="text-decoration: none;"><div class="button" style="background: pink; font-size: 24px; padding: 14px 40px; border-radius: 12px; margin-top: 1vh; margin-bottom: 1vh; float: right;">Join existing chat</div></a>    
+                </center>
+            </div>
+        </div>
+    </body>
+</html>

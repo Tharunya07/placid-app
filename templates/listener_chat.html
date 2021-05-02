@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <title>Placid</title>
+</head>
+
+<Style>
+:root {
+	--dark-color-a:#081f3e;
+	--dark-color-b: #20294b;
+	--light-color: #fce4ec;
+	--success-color: #5cb85f;
+	--error-color: #d9534f;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	background-size: cover;
+	margin: 20px;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: var(--light-color);
+	color: var(--dark-color-a);
+	border: 0;
+	font-size: 17px;
+}
+
+
+.chat-container {
+  display:block;
+  position:absolute;
+  right: 100px;
+  padding: 10px;
+  border-radius:10px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 10%;
+  	max-width: 1100px;
+	background: #fff;
+	margin: 30px auto;
+	overflow:auto;
+}
+
+.chat-header {
+	background: var(--dark-color-a);
+	color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.chat-main {
+	display: box;
+	grid-template-columns: 1fr 3fr;
+}
+
+.chat-sidebar {
+	background: var(--dark-color-b);
+	color: #fff;
+	padding: 20px 20px 60px;
+	overflow-y: scroll;
+}
+
+.chat-sidebar h2 {
+	font-size: 20px;
+	background: rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.chat-sidebar h3 {
+	margin-bottom: 15px;
+}
+
+.chat-sidebar ul li {
+	padding: 10px 0;
+}
+
+.chat-messages {
+	padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.chat-messages .message {
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: var(--light-color);
+	border-radius: 5px;
+}
+
+.chat-messages .message .meta {
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--dark-color-b);
+	opacity: 0.7;
+	margin-bottom: 7px;
+}
+
+.chat-messages .message .meta span {
+	color: #777;
+}
+
+.chat-form-container {
+	padding: 20px 30px;
+	background-color: var(--dark-color-a);
+}
+
+.chat-form-container form {
+	display: flex;
+}
+
+.chat-form-container input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	flex: 1;
+}
+
+.join-container {
+	max-width: 500px;
+	margin: 80px auto;
+	color: #fff;
+}
+
+.join-header {
+	text-align: center;
+	padding: 20px;
+	background: var(--dark-color-a);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.join-main {
+	padding: 30px 40px;
+	background: var(--dark-color-b);
+}
+
+.join-main p {
+	margin-bottom: 20px;
+}
+
+.join-main .form-control {
+	margin-bottom: 20px;
+}
+
+.join-main label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.join-main input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main select {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main .btn {
+	margin-top: 20px;
+	width: 100%;
+}
+.notes-form-container {
+    position: absolute;
+  left: 100px;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+    margin-right: auto;
+    top: 10%;
+    margin: 30px auto;
+    max-width: 1100px;
+	overflow:auto;
+	padding: 20px;
+	background-color: var(--dark-color-a);
+}
+
+.notes-form-container form {
+	display: flex;
+}
+
+.notes-form-container input[type='text'] {
+	font-size: 20px;
+	padding: 5px 10px;
+	height: 345px;
+    max-width: 1100px;
+	flex: 1 100%;
+}
+
+@media (max-width: 700px) {
+	.chat-main {
+		display: block;
+	}
+
+	.chat-sidebar {
+		display: none;
+	}
+}
+
+</Style>
+
+<body background="{{url_for('static', filename='images/bg.png')}}">
+  <div class="chat-container">
+    <header class="chat-header">
+      <h1><i class="fas fa-smile"></i> Placid</h1>
+      <a href="/leave_session_speaker" class="btn">Leave chat</a>
+    </header>
+    <main class="chat-main">
+      <div class="chat-messages" id="messagesdisplay">
+      <!-- Messages would be added here -->
+
+      </div>
+       </main>
+    <div class="chat-form-container">
+      <div id="chat-form">
+        <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off" />
+        <button class="btn" id="sendbutton"><i class="fas fa-paper-plane"></i> Send</button>
+      </div>
+      </div>
+      </div>
+
+    <div class="notes-form-container">
+      <div id="notes-form">
+        <input id="notes" type="text" placeholder="Add Notes Here" required autocomplete="off"/>
+        <button class="btn" id="savenotes"><i class="fas fa-plus"></i> Add</button>
+      </div>
+    </div>
+
+
+    <script type="text/javascript" charset="utf-8">
+        let uid='{{uid}}';
+        let sessionid='{{sessionid}}';
+        function first_data_get(){
+            $.ajax({
+                url: "/first_data_get",
+                data: {json: JSON.stringify({'sessid': sessionid,'uid':uid})},
+                error: function (data) {
+                    showerrors("Lost Connection. Try refreshing...");
+                },
+                success: function (data) { var notes_element = document.getElementById("notes"); notes_element.value=data["notes"]; showdata(data); },
+                dataType: "json",
+                timeout: 3000
+            });
+        };
+    
+        function poll(){
+            $.ajax({
+                url: "/check_for_data",
+                data: {json: JSON.stringify({'sessid': sessionid,'uid':uid,'lasttimestamp':last_time_stamp})},
+                success: function (data) {
+                    showdata(data);
+                    setTimeout( () => {poll();} , 2000 );
+                },
+                error: function (data) {
+                    showerrors("Lost Connection. Try refreshing...");
+                },
+            dataType: "json",
+            timeout: 3000
+        });
+    };
+    
+    function sendMessageData(messageContent){
+        $.ajax({
+            url: "/send_message",
+            data: {json: JSON.stringify({'uid': uid,'sessid': sessionid,'content': messageContent})},
+            error: function (data) {
+                showerrors("Error sending message. Try Again...")
+            },
+            dataType: "json", 
+            timeout: 3000,
+        })
+    }
+    
+    var lastdataobj=[];
+    var last_time_stamp='';
+    var first_clear=0;
+    function showdata(data){
+        var msg_element = document.getElementById("messagesdisplay");
+        if (JSON.stringify(lastdataobj) === JSON.stringify(data.msgs)) {}
+        else{
+            lastdataobj=data.msgs;
+            if (first_clear == 0){ msg_element.innerHTML=''; first_clear+=1;}
+            for (i in data.msgs) {
+                if (data.msgs[i][2]==uid){ msg_element.innerHTML += "<div class=\"message\" style=\"background-color: #F81894;\"> <p class =\"meta\"> Me <span> UTC "+data.msgs[i][1]+"</span></p> <p class =\"text\">" +data.msgs[i][0] + "</p></div>"; }
+                else { msg_element.innerHTML += "<div class=\"message\"> <p class =\"meta\"> Speaker <span> UTC "+data.msgs[i][1]+"</span></p> <p class =\"text\">" +data.msgs[i][0] + "</p></div>" ;}
+                last_time_stamp=data.msgs[i][1];
+            }}
+    };
+    
+    function showerrors(error){
+        alertify.error(error);
+    };
+
+    function trigger_save_success(error){
+        alertify.success("Notes saved successfully!")
+    };
+
+    function sendNotesData(notesContent){
+        $.ajax({
+            url: "/send_notes",
+            data: {json: JSON.stringify({'uid': uid,'sessid': sessionid,'content': notesContent})},
+            success: function (data) {
+                trigger_save_success();
+            },
+            error: function (data) {
+                showerrors("Error saving notes. Try Again...")
+            },
+            dataType: "json", 
+            timeout: 3000,
+        })
+    };
+        
+    function onsendclick() {
+        var messageContent = document.getElementById("msg").value;
+        sendMessageData(messageContent);
+    };
+
+    function onsaveclick() {
+        var notesContent = document.getElementById("notes").value;
+        sendNotesData(notesContent);
+    }
+    
+    var sendbton = document.getElementById("sendbutton");
+    sendbton.addEventListener('click', onsendclick, false);
+    
+    var sendbton = document.getElementById("savenotes");
+    sendbton.addEventListener('click', onsaveclick, false);
+
+    first_data_get();
+    poll();
+    </script>
+</body>
+</html> 

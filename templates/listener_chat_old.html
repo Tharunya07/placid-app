@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title> Listener Session </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h3>Messages: </h3>
+        <h4 id="msg0">No messages yet!</h4>
+        <br><br><br>
+        <h3>Send message: </h3>
+        <input type="textbox" id="fromme">
+        <input type="submit" id="sendbutton">
+        <br><br><br>
+        <h3> Notes: </h3>
+        <input type="textbox" id="notes" value="">
+        <input type="submit" id="savenotes">
+        <br><br><br>
+        <h2 id="successmessage">No success messages yet.</h2>
+        <br><br><br>
+        <h2 id="savesuccessmessage">No notes save success messages yet.</h2>
+        <br><br><br>
+        <h2 id="error">No errors occurred.</h2>
+    </body>
+    <script type="text/javascript" charset="utf-8">
+        let uid='{{uid}}';
+        let sessionid='{{sessionid}}';
+        function first_data_get(){
+            $.ajax({
+                url: "/first_data_get",
+                data: {json: JSON.stringify({'sessid': sessionid,'uid':uid})},
+                error: function (data) {
+                    showerrors("Lost Connection. Try refreshing...");
+                },
+                success: function (data) { var notes_element = document.getElementById("notes"); notes_element.value=data["notes"]; showdata(data); },
+                dataType: "json",
+                timeout: 3000
+            });
+            setTimeout( () => {poll();}, 3000);
+        };
+
+        function poll(){
+            $.ajax({
+                url: "/check_for_data",
+                data: {json: JSON.stringify({'sessid': sessionid,'uid':uid,'lasttimestamp':last_time_stamp})},
+                success: function (data) {
+                    showdata(data);
+                    setTimeout( () => {poll();} , 2000 );
+                },
+                error: function (data) {
+                    showerrors("Lost Connection. Try refreshing...");
+                },
+            dataType: "json",
+            timeout: 3000
+        });
+    };
+
+    function trigger_send_success(data){
+        var element = document.getElementById("successmessage");
+        element.innerHTML = "Message sent successfully!!";
+    };
+
+    function trigger_save_success(data){
+        var element = document.getElementById("savesuccessmessage");
+        element.innerHTML = "Notes Saved successfully!!";
+    };
+
+    function sendMessageData(messageContent){
+        $.ajax({
+            url: "/send_message",
+            data: {json: JSON.stringify({'uid': uid,'sessid': sessionid,'content': messageContent})},
+            success: function (data) {
+                trigger_send_success();
+            },
+            error: function (data) {
+                showerrors("Error sending message. Try Again...")
+            },
+            dataType: "json", 
+            timeout: 3000,
+        })
+    };
+
+    function sendNotesData(notesContent){
+        $.ajax({
+            url: "/send_notes",
+            data: {json: JSON.stringify({'uid': uid,'sessid': sessionid,'content': notesContent})},
+            success: function (data) {
+                trigger_save_success();
+            },
+            error: function (data) {
+                showerrors("Error saving notes. Try Again...")
+            },
+            dataType: "json", 
+            timeout: 3000,
+        })
+    };
+    
+    var lastdataobj=[];
+    var last_time_stamp='';
+    var first_clear=0;
+    function showdata(data){
+        var msg_element = document.getElementById("msg0");
+        if (JSON.stringify(lastdataobj) === JSON.stringify(data.msgs)) {}
+        else{
+            lastdataobj=data.msgs;
+            if (first_clear == 0){ msg_element.innerHTML=''; first_clear+=1;}
+            msg_element.innerHTML += '';
+            for (i in data.msgs) {
+                msg_element.innerHTML += "Message Content: "+data.msgs[i][0]+" "
+                msg_element.innerHTML += "Message Time: UTC"+data.msgs[i][1]+" "
+                msg_element.innerHTML += "Message from: "+data.msgs[i][2]+" "
+                msg_element.innerHTML += "<br>"
+                last_time_stamp=data.msgs[i][1];
+                console.log(last_time_stamp);
+            }}
+    };
+
+    function showerrors(error){
+        var element = document.getElementById("error");
+        element.innerHTML = error;
+    };
+
+    function onsendclick() {
+        var messageContent = document.getElementById("fromme").value;
+        sendMessageData(messageContent);
+    };
+
+    function onsaveclick() {
+        var notesContent = document.getElementById("notes").value;
+        sendNotesData(notesContent);
+    }
+
+    var sendbton = document.getElementById("sendbutton");
+    sendbton.addEventListener('click', onsendclick, false);
+
+    var sendbton = document.getElementById("savenotes");
+    sendbton.addEventListener('click', onsaveclick, false);
+    
+    first_data_get();
+    </script>
+</html>

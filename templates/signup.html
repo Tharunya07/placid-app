@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title> Placid | Signup </title>
+        <style>
+            body {
+	            font-family: 'Roboto', sans-serif;
+	            font-size: 16px;
+	            background-size: cover;
+	            margin: 20px;
+            }
+        </style>
+    </head>
+    <body background="{{url_for('static', filename='images/bg.png')}}">
+        <center><br><br><br><h1>Signup</h1></center>
+        <div class="container" style="display: block; margin-top: 10vh; margin-bottom: 15vh;">
+        <form method="POST" action="#">
+            <div class="subcontainer" style="float: center; margin-left: 40vh; margin-right: 40vh; margin-top: 10vh; display: block;">
+                <center>
+                    <h3>Username: </h3><input type="textbox" name="username" style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; display: inline;">
+                    <h3>Password: </h3><input type="password" name="passwd" style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; display: inline;">
+                    <h3>Confirm Password: </h3><input type="password" name="passwd_confirm" style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; display: inline;">
+                    <input type="submit" style="background: pink; font-size: 24px; padding: 14px 40px; border-radius: 12px; margin-top: 1vh; margin-bottom: 1vh; float: right;">
+                </center>
+            </div>
+        </div>
+    </form>
+        <center>
+            {% if error!=None %}
+                <font color="red"><h3>{{error}}</h3></font>
+            {% endif %}
+        </center>
+    </body>
+</html>

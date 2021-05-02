@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+        <title> Placid </title>
+        <style>
+            body {
+	            font-size: 16px;
+	            background-size: cover;
+	            margin: 20px;
+                font-family: 'Lato', sans-serif;    
+            }
+        </style>
+    </head>
+    <body background="{{url_for('static', filename='images/bg.png')}}">
+        <div class="header" style="margin-left: 4vh;">
+            <font color="#FF007F" style="display: inline-block;"><h1>Placid</h1></font>
+            <a href="/login" style="color: #000000;"><h2 style="background: #0d3263; color: white; margin-bottom: 5vh; padding: 6px 20px; border-radius: 12px; margin-left: 150vh; display: inline-block;">Login</h2></a>
+            <a href="/signup" style="color: #000000;"><h2 style="background: #0d3263; color: white; margin-bottom: 5vh; padding: 6px 20px; border-radius: 12px; margin-left: 2vh; display: inline-block;">Signup</h2></a>
+        </div>
+        <div class="container" style="display: block;">
+        <div class="maintext" style="margin-left: 20vh; width: 55vh; margin-top: 6vh; float: left;">
+            <b><font color="#0d3263" size=50>A private chat app for improving your mental health.</font></b>
+            <br>
+            <br>
+            <center>
+                <a href="/signup" style="color: #000000;"><h2 style="background: #0d3263; color: white; margin-bottom: 5vh; padding: 6px 20px; border-radius: 12px; margin-left: -5vh; display: inline-block;">Get Started</h2></a>
+            </center>
+        </div>
+
+        <div class="dispimage" style="margin-left: 60vh; width: 55vh; margin-top: 6vh; float: left; border-radius: 12vh; margin-bottom: -5vh;">
+            <img src="{{url_for('static', filename='images/0.png')}}" width="80%">
+        </div>
+        </div>
+        <div id="footer" style="display: block; margin-top: 80vh; width: 100%;">
+
+            <br>
+            <center>
+                <h2>
+                    Designed and Implemented by The A Team
+                </h2>
+            </center>
+            
+        </div>
+        </body>
+        </html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Placid | Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+    margin: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
+  body {
+    background-color: bisque;
+    height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat;
+	background-size: cover;
+    font-family: "Poppins";
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2em;
+  }
+  header .logo {
+    color: #E91E63;
+    font-weight: bold;
+  }
+
+  .contactbutton{
+    position: absolute;
+    top: 2em;
+  }
+
+  header ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 2em;
+  padding-right: 10em;
+  }
+
+  header ul a {
+    display: block;
+    padding: 0 2em;
+  }
+
+  .logo {
+  font-size: 1.3em;
+  }
+  .header {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 66% auto;
+        grid-template-columns: 66% auto;
+    background: unset;
+  }
+  .header header {
+    background:white;
+  }
+  header {
+    padding: 0.2em;
+    padding-left: 16em;
+  }
+  .profile {
+    padding: 0.2em ;
+  }
+
+
+  .profile {
+    display: block;
+  }
+  .profile ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0 10em;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 7em;
+    float: right;
+  }
+  .profile ul img {
+    width: 30px;
+  }
+  
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
+.container {
+  position: absolute;
+  left: 800px;
+  top: 120px;
+  margin: 20px;
+  max-width: 300px;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: lightpink;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body background="{{url_for('static', filename='images/bg.png')}}">
+    <div>
+    <div class="header">
+        <header>
+          <h2><a href="#" class="logo">Placid</a></h2>
+          <nav>
+            <ul>
+            <!--  <li><a href="#">About us</a></li> -->
+            <!--  <li><a href="#">Product</a></li> -->
+            <!--  <li><a href="#">why Placid?</a></li> -->
+            </ul>
+          </nav>
+        </header>
+        <div class="profile">
+          <ul>
+            <li>
+              <svg  class="contactbutton" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="50" viewBox="0 0 152 83">
+                <defs>
+                  <filter id="contact-bg" x="0" y="0" width="152" height="81" filterUnits="userSpaceOnUse">
+                    <feOffset dx="10" dy="7" input="SourceAlpha"/>
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feFlood flood-opacity="0.161"/>
+                    <feComposite operator="in" in2="blur"/>
+                    <feComposite in="SourceGraphic"/>
+                  </filter>
+                </defs>
+                <g id="Component_1_1" data-name="Component 1 – 1" transform="translate(0 2)">
+                  <g transform="matrix(1, 0, 0, 1, 0, -2)" filter="url(#contact-bg)">
+                    <rect id="contact-bg-2" data-name="contact-bg" width="133" height="63" rx="28" transform="translate(0 2)" fill="#071e3d"/>
+                  </g>
+                  <text id="Contact_" data-name="Contact
+              " transform="translate(17 38)" fill="#fff" font-size="24" font-family="Poppins-SemiBold, Poppins" font-weight="600"><tspan x="0" y="0">Contact</tspan><tspan x="0" y="35"></tspan></text>
+                </g>
+            </svg>          
+            </li>
+            <li></li>
+        </ul>
+        </div>
+    </div>
+
+    <div class="bg-img">
+    <form action="#" class="container" method="POST">
+    <h1>Login</h1>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+
+    <button type="submit" class="btn">Login</button>
+    </form>
+    </div>
+    {% if error!=None %}
+	    <h4><font color="red">{{error}}</font></h4>
+    {% endif %}
+    </div>
+
+
+</body>
+</html>
