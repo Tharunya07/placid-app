@@ -1,6 +1,6 @@
 # PLACID
 
-*A safe place to share your feelings.*
+*A safe place to share your feelings.* <br>
 A hackathon project completed for [Tetraflip](https://tetraflip.owaspvit.com/)
 *Domain:Healthcare*
 In this fast moving world, sometimes we just feel the need to just pause, rethink, and recollect ourselves. A place like that is hard to find. We feel conserved and unable to express ourselves even to our immediate loved ones with the feeling that we might get judged or looked down at. Things can get hard but it's ok we'll get through this together shall we?
